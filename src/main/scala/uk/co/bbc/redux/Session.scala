@@ -4,8 +4,8 @@ import java.util.Date
 
 class SessionInvalidException extends Exception
 
-class Session (var token:String) {
+class Session (val token:String) {
 
-  var createdAt:Date = new java.util.Date
+  val createdAt:Date = new java.util.Date
 
 }

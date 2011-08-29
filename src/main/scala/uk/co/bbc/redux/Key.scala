@@ -13,9 +13,9 @@ object Key {
   }
 }
 
-class Key (var value:String) {
+class Key (val value:String) {
 
-  var createdAt:Date = new Date
-  var expiresAt:Date = new Date(createdAt.getTime() + (24 * 60 * 60 * 1000))
+  val createdAt:Date = new Date
+  val expiresAt:Date = new Date(createdAt.getTime() + (24 * 60 * 60 * 1000))
 
 }

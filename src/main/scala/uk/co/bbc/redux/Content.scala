@@ -23,8 +23,8 @@ object Content {
   }
 }
 
-class Content(var diskReference:String, var duration:Int, var startDate:Date, var channel:String, var frames:Boolean,
-                  var title:String, var description:String, var seriesCrid:String, var programmeCrid:String, var key:Key)
+class Content(val diskReference:String, val duration:Int, val startDate:Date, val channel:String, val frames:Boolean,
+                  val title:String, val description:String, val seriesCrid:String, val programmeCrid:String, var key:Key)
 
 
 
