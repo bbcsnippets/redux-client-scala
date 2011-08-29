@@ -30,7 +30,7 @@ class Client {
 
   def key (diskReference:String, session:Session) : Key = {
     var (status:Int, body:String) = getRequestWithStringBody("/content/"+diskReference+"/key?token="+session.token)
-    keyOrError(status, () => { Key.createFromXMLResponse(XML.loadString(body)) })
+    contentOrError(status, () => { Key.createFromXMLResponse(XML.loadString(body)) })
   }
 
   def content (diskReference:String, session:Session) : Content = {
@@ -58,17 +58,8 @@ class Client {
     case _   => otherHttpException(status)
   }
 
-  private def keyOrError(status:Int, key: () => Key) : Key = status match {
-    case 200 => key()
-    case _   => contentException(status)
-  }
-
-  private def contentOrError(status:Int, content: () => Content) : Content = status match {
-    case 200 => content()
-    case _   => contentException(status)
-  }
-
-  private def contentException(status:Int) = status match {
+  private def contentOrError[T](status:Int, block: () => T) : T = status match {
+    case 200 => block()
     case 403 => throw new SessionInvalidException
     case 404 => throw new ContentNotFoundException
     case _   => otherHttpException(status)
