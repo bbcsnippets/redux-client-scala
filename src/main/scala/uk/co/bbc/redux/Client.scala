@@ -30,7 +30,7 @@ class Client {
   }
 
   def logout (user: User) : User = {
-    val path:String = "/user/logout?token="+user.session.token
+    val path:String = REDUX_API_HOST+"/user/logout?token="+user.session.token
     getRequestWithStringResponse(path, otherHttpException)
     user.session = null
     user

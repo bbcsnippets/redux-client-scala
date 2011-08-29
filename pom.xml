@@ -21,6 +21,13 @@
     <scala.version>2.8.0</scala.version>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>The Buzz Media Maven Repository</id>
+      <url>http://maven.thebuzzmedia.com</url>
+    </repository>
+  </repositories>
+
 <!--
   <repositories>
     <repository>
@@ -38,6 +45,7 @@
     </pluginRepository>
   </pluginRepositories>
 -->
+
   <dependencies>
     <dependency>
       <groupId>org.scala-lang</groupId>
@@ -53,6 +61,14 @@
         <groupId>commons-httpclient</groupId>
         <artifactId>commons-httpclient</artifactId>
         <version>3.1</version>
+    </dependency>
+
+    <!-- Currently used in benchmarking scripts -->
+    <dependency>
+      <groupId>com.thebuzzmedia</groupId>
+      <artifactId>imgscalr-lib</artifactId>
+      <version>3.2</version>
+      <type>jar</type>
     </dependency>
 
     <!-- Test -->
@@ -113,6 +129,14 @@
             <include>**/*Test.*</include>
             <include>**/*Suite.*</include>
           </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>maven-scala-plugin</artifactId>
+        <configuration>
+          <addToClasspath>${basedir}/target/classes/</addToClasspath>
+          <!-- <scriptFile>src/test/scala/benchmarks/benchmarks.scala</scriptFile> -->
         </configuration>
       </plugin>
     </plugins>
