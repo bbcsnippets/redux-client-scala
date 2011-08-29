@@ -2,7 +2,8 @@ package uk.co.bbc.redux
 
 import scala.xml._
 import scala.io.Source
-import java.io.InputStreamReader
+import javax.imageio.ImageIO
+import java.awt.image.BufferedImage
 import org.apache.commons.httpclient._
 import org.apache.commons.httpclient.methods._
 import org.apache.commons.httpclient.params.HttpMethodParams
@@ -14,59 +15,112 @@ class ClientHttpException(status:String) extends Exception(status:String) {}
 
 class Client {
 
-  val REDUX_HOST : String = "http://api.bbcredux.com"
+  /****************************************
+   * PUBLIC API
+   ****************************************/
+
+  val REDUX_API_HOST : String = "http://api.bbcredux.com"
+  val REDUX_WWW_HOST : String = "http://g.bbcredux.com"
 
   var httpClient:HttpClient = new HttpClient
 
   def login (username: String, password: String) : User = {
-    var (status:Int, body:String) = getRequestWithStringBody("/user/login?username="+username+"&password="+password)
-    userOrError(status, () => { User.createFromXMLResponse(XML.loadString(body)) })
+    val path:String = "/user/login?username="+username+"&password="+password
+    userRequest(path, xml => User.createFromXMLResponse(xml) )
   }
 
   def logout (user: User) : User = {
-    var (status:Int, _) = getRequestWithStringBody("/user/logout?token="+user.session.token)
-    userOrError(status, () => { user.session = null; user })
+    val path:String = "/user/logout?token="+user.session.token
+    getRequestWithStringResponse(path, otherHttpException)
+    user.session = null
+    user
   }
 
   def key (diskReference:String, session:Session) : Key = {
-    var (status:Int, body:String) = getRequestWithStringBody("/content/"+diskReference+"/key?token="+session.token)
-    contentOrError(status, () => { Key.createFromXMLResponse(XML.loadString(body)) })
+    val path:String = "/content/"+diskReference+"/key?token="+session.token
+    contentRequest (path, xml => Key.createFromXMLResponse(xml) )
   }
 
   def content (diskReference:String, session:Session) : Content = {
-    var (status:Int, body:String) = getRequestWithStringBody("/content/"+diskReference+"/data?token="+session.token)
-    contentOrError(status, () => { Content.createFromXMLResponse(XML.loadString(body)) })
+    val path:String = "/content/"+diskReference+"/data?token="+session.token
+    contentRequest (path, xml => Content.createFromXMLResponse(xml) )
   }
 
-  private def getRequestWithStringBody(path: String) : (Int, String) = {
-    var url:String            = REDUX_HOST+path
+  def frames (diskReference:String, minute:Int, key:Key) : Frames = {
+    val secs:String = "%05d" format (minute * 60)
+    val path:String = "/programme/"+diskReference+"/download/"+key.value+"/frame-270-"+secs+"-60.jpg"
+    imageRequest (path, image => new Frames(image) )
+  }
+
+  /****************************************
+   * DOMAIN SPECIFIC GET REQUEST METHODS
+   ****************************************/
+
+   private def imageRequest[T] (path:String, block: BufferedImage => T) : T = {
+     var response:BufferedImage = getRequestWithImageResponse(REDUX_WWW_HOST+path, status => status match {
+       case 404 => throw new ContentNotFoundException
+       case _   => otherHttpException(status)
+     })
+     block(response)
+   }
+
+   private def contentRequest[T] (path:String, block: NodeSeq => T) : T = {
+     var response:NodeSeq = getRequestWithXmlResponse(REDUX_API_HOST+path, status => status match {
+       case 403 => throw new SessionInvalidException
+       case 404 => throw new ContentNotFoundException
+       case _   => otherHttpException(status)
+     })
+     block(response)
+   }
+
+   private def userRequest[T] (path:String, block: NodeSeq => T) : T = {
+     var response:NodeSeq = getRequestWithXmlResponse(REDUX_API_HOST+path, status => status match {
+       case 403 => throw new UserPasswordException
+       case 404 => throw new UserNotFoundException
+       case _   => otherHttpException(status)
+     })
+     block(response)
+   }
+
+   private def otherHttpException(status:Int) = {
+     throw new ClientHttpException(status.toString)
+   }
+
+
+  /****************************************
+   * ABSTRACT GET REQUEST METHODS
+   ****************************************/
+
+  private def getRequestWithImageResponse(url: String, error: Int => BufferedImage) : BufferedImage = {
+    getRequest(url, method => {
+      ImageIO.read(method.getResponseBodyAsStream())
+    }, error)
+  }
+
+  private def getRequestWithXmlResponse (url:String, error: Int => NodeSeq) : NodeSeq = {
+    getRequest(url, method => {
+      XML.load(method.getResponseBodyAsStream())
+    }, error)
+  }
+
+  private def getRequestWithStringResponse (url:String, error: Int => String) : String = {
+    getRequest(url, method => {
+      var source:Source   = Source.fromInputStream(method.getResponseBodyAsStream(), method.getResponseCharSet())
+      source.getLines().mkString("\n")
+    }, error)
+  }
+
+  private def getRequest[T] (url: String, success: GetMethod => T, error: Int => T) : T = {
     var method:GetMethod      = new GetMethod(url)
     var status:Int            = httpClient.executeMethod(method)
     try {
-      var source:Source   = Source.fromInputStream(method.getResponseBodyAsStream(), method.getResponseCharSet())
-      var response:String = source.getLines().mkString("\n")
-      (status, response)
+      status match {
+        case 200 => success(method)
+        case _   => error(status)
+      }
     } finally {
       method.releaseConnection()
     }
-  }
-
-  private def userOrError(status:Int, user: () => User) : User = status match {
-    case 200 => user()
-    case 403 => throw new UserPasswordException
-    case 404 => throw new UserNotFoundException
-    case _   => otherHttpException(status)
-  }
-
-  private def contentOrError[T](status:Int, block: () => T) : T = status match {
-    case 200 => block()
-    case 403 => throw new SessionInvalidException
-    case 404 => throw new ContentNotFoundException
-    case _   => otherHttpException(status)
-  }
-
-  private def otherHttpException(status:Int) = {
-    throw new ClientHttpException(status.toString)
   }
 
 }
