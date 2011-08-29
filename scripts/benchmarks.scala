@@ -8,7 +8,7 @@ var password:String = Console.readLine("Redux Pass: ")
 
 var client:Client   = new Client
 var user:User       = client.login(username, password)
-var content:Content = client.content("5645630572656380584", user.session)
+var content:Content = client.content("5110029682485761909", user.session)
 var frames:Frames   = client.frames(content.diskReference, 1, content.key)
 
 def benchmark (description:String) (block: => Unit) {
