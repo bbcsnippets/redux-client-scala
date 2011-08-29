@@ -9,7 +9,7 @@ var password:String = Console.readLine("Redux Pass: ")
 var client:Client   = new Client
 var user:User       = client.login(username, password)
 var content:Content = client.content("5645630572656380584", user.session)
-var frames:Frames
+var frames:Frames   = null
 
 def benchmark (description:String) (block: => Unit) {
   var start:Date = new Date
@@ -18,7 +18,7 @@ def benchmark (description:String) (block: => Unit) {
   println(description+" took : "+time.toString+" ms")
 }
 
-benchmark ("Loding frames object from Redux API") {
+benchmark ("Loading frames object from Redux API") {
   frames = client.frames(content.diskReference, 1, content.key)
 }
 
