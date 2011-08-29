@@ -3,6 +3,7 @@ package uk.co.bbc.redux
 import scala.xml._
 import scala.io.Source
 import javax.imageio.ImageIO
+import java.io.BufferedInputStream
 import java.awt.image.BufferedImage
 import org.apache.commons.httpclient._
 import org.apache.commons.httpclient.methods._
@@ -93,7 +94,8 @@ class Client {
 
   private def getRequestWithImageResponse(url: String, error: Int => BufferedImage) : BufferedImage = {
     getRequest(url, method => {
-      ImageIO.read(method.getResponseBodyAsStream())
+      ImageIO.setUseCache(false)
+      ImageIO.read(new BufferedInputStream(method.getResponseBodyAsStream()))
     }, error)
   }
 
