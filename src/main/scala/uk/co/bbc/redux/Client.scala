@@ -89,7 +89,7 @@ class Client {
 
 
   /****************************************
-   * ABSTRACT GET REQUEST METHODS
+   * GENERIC GET REQUEST METHODS
    ****************************************/
 
   private def getRequestWithImageResponse(url: String, error: Int => BufferedImage) : BufferedImage = {
