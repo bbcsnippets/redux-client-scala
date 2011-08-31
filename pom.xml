@@ -35,6 +35,10 @@
 
   <repositories>
     <repository>
+      <id>Maven Repository</id>
+      <url>http://repo1.maven.org</url>
+    </repository>
+    <repository>
       <id>The Buzz Media Maven Repository</id>
       <url>http://maven.thebuzzmedia.com</url>
     </repository>
