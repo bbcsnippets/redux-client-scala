@@ -1,4 +1,4 @@
-temp = "../temp"
+temp = "temp"
 puts `git clone -l -s -b gh-pages . #{temp}`
 if system("mvn release:perform")
     puts `cd #{temp} && git add -A && git commit -m "releasing artifacts" && git push origin gh-pages`

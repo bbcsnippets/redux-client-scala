@@ -112,11 +112,11 @@
   <distributionManagement>
     <site>
       <id>${project.artifactId}</id>
-      <url>file:///${basedir}/temp</url>
+      <url>file:///${basedir}/../../../temp</url>
     </site>
     <repository>
       <id>${project.artifactId}</id>
-      <url>file:///${basedir}/temp/maven</url>
+      <url>file:///${basedir}/../../../temp/maven2</url>
     </repository>
   </distributionManagement>
 
