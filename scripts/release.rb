@@ -7,4 +7,4 @@ if system("mvn release:perform")
 else
   puts " could not release artifact "
 end
-puts `rm -r #{temp}`
+puts `rm -rdf #{temp};true`
