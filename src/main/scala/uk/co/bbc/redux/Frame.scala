@@ -26,9 +26,15 @@ object Frame {
     // Throw up an error if the requested second is out of range
     if (second * WIDTH > imageReader.getWidth(0)) throw new FrameNotFoundException
 
+    // Crop
     var param:ImageReadParam         = imageReader.getDefaultReadParam()
     param.setSourceRegion(new Rectangle(second * WIDTH, 0, WIDTH, HEIGHT))
-    imageReader.read(0, param)
+
+    var frame:BufferedImage = imageReader.read(0, param)
+    imageStream.close
+
+    frame
+
   }
 
 }
