@@ -47,10 +47,19 @@ class Client {
     contentRequest (path, xml => Content.createFromXMLResponse(xml) )
   }
 
-  def frames (diskReference:String, minute:Int, key:Key) : Frames = {
-    val secs:String = "%05d" format (minute * 60)
-    val path:String = "/programme/"+diskReference+"/download/"+key.value+"/frame-270-"+secs+"-60.jpg"
-    imageRequest (path, image => new Frames(image) )
+  def frame (diskReference:String, seconds:Int, key:Key) : BufferedImage = {
+    val mins:Int    = seconds / 60
+    val secs:Int    = seconds - mins * 60
+    val code:String = "%05d" format (mins * 60)
+    val path:String = "/programme/"+diskReference+"/download/"+key.value+"/frame-270-"+code+"-60.jpg"
+
+    getRequest(REDUX_WWW_HOST+path, method => {
+      Frame.fromInputStream(method.getResponseBodyAsStream, secs)
+    }, status => status match {
+      case 404 => throw new ContentNotFoundException
+      case _   => otherHttpException(status)
+    })
+
   }
 
   /****************************************
@@ -113,8 +122,8 @@ class Client {
   }
 
   private def getRequest[T] (url: String, success: GetMethod => T, error: Int => T) : T = {
-    var method:GetMethod      = new GetMethod(url)
-    var status:Int            = httpClient.executeMethod(method)
+    val method:GetMethod = new GetMethod(url)
+    val status:Int       = httpClient.executeMethod(method)
     try {
       status match {
         case 200 => success(method)

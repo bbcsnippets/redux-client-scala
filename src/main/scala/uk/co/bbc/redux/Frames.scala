@@ -1,27 +1,32 @@
 package uk.co.bbc.redux
 
 import java.awt.image.BufferedImage
+import java.io.InputStream
+import javax.imageio.ImageReader
+import javax.imageio.stream.ImageInputStream
+import javax.imageio.ImageReadParam
+import javax.imageio.ImageIO
+import java.awt.Rectangle
+import java.awt.image.BufferedImage
 
 class FrameNotFoundException extends Exception
 
-class Frames(val image:BufferedImage) {
+object Frame {
 
-  val FRAME_WIDTH:Int  = 480
-  val FRAME_HEIGHT:Int = 270
+  val WIDTH:Int  = 480
+  val HEIGHT:Int = 270
 
-  // Num of seconds in this frames object
-  def seconds: Int = image.getWidth() / FRAME_WIDTH
+  def fromInputStream(inputStream:InputStream, second:Int) : BufferedImage = {
+    var imageReader:ImageReader      = ImageIO.getImageReadersByFormatName("JPEG").next()
+    var imageStream:ImageInputStream = ImageIO.createImageInputStream(inputStream)
 
-  // Has the frame for second in this minute?
-  def hasFrame(second:Int): Boolean = (seconds - 1) >= second && second >= 0
+    // Throw up an error if the requested second is out of range
+    if (second * WIDTH > imageReader.getWidth(0)) throw new FrameNotFoundException
 
-  // Retreive the frame for this second (e.g crop image)
-  def getFrame(second:Int): BufferedImage = {
-    if (hasFrame(second)) {
-      image.getSubimage(FRAME_WIDTH * second, 0, FRAME_WIDTH, FRAME_HEIGHT)
-    } else {
-      throw new FrameNotFoundException
-    }
+    var param:ImageReadParam         = imageReader.getDefaultReadParam()
+    imageReader.setInput(imageStream)
+    param.setSourceRegion(new Rectangle(second * WIDTH, 0, WIDTH, HEIGHT))
+    imageReader.read(0, param)
   }
 
 }

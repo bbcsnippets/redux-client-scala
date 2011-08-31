@@ -101,7 +101,7 @@ class ClientTest {
   def contentThrowsNotFoundException                  = withStatus(404, () => { client.content("", session) })
 
   @Test(expected = classOf[ContentNotFoundException])
-  def framesThrowsNotFoundException                  = withStatus(404, () => { client.frames("", 1, new Key("some-key")) })
+  def framesThrowsNotFoundException                  = withStatus(404, () => { client.frame("", 1, new Key("some-key")) })
 
   @Test(expected = classOf[SessionInvalidException])
   def keyThrowsSessionInvalidException                = withStatus(403, () => { client.key("", session) })

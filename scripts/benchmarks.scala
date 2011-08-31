@@ -18,21 +18,5 @@ def benchmark (description:String) (block: => Unit) {
   println(description+" took : "+time.toString+" ms")
 }
 
-benchmark ("Loading frames object from Redux API") {
-  frames = client.frames(content.diskReference, 1, content.key)
-}
-
-benchmark ("Get "+frames.seconds.toString+" frames from a Frames object") {
-  for (i <- 0 until frames.seconds) {
-    var frame:BufferedImage = frames.getFrame(i)
-  }
-}
-
-benchmark ("Scale by 0.5, "+frames.seconds.toString+" frames from a Frames object") {
-  for (i <- 0 until frames.seconds) {
-    var frame:BufferedImage = frames.getFrame(i)
-    Scalr.resize(frame, Scalr.Method.AUTOMATIC, frames.FRAME_WIDTH / 2, frames.FRAME_HEIGHT / 2, null)
-  }
-}
 
 client.logout(user)
