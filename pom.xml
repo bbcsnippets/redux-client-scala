@@ -23,10 +23,10 @@
 
   <scm>
     <connection>
-      scm:git:http://github.com/bbcsnippets/redux-client-scala.git
+      scm:git:git://github.com/bbcsnippets/redux-client-scala.git
     </connection>
     <developerConnection>
-      scm:git:http://github.com/bbcsnippets/redux-client-scala.git
+      scm:git:git://github.com/bbcsnippets/redux-client-scala.git
     </developerConnection>
     <url>
       http://github.com/bbcsnippets/redux-client-scala
