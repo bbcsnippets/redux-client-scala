@@ -81,6 +81,7 @@
       <artifactId>imgscalr-lib</artifactId>
       <version>3.2</version>
       <type>jar</type>
+      <scope>test</scope>
     </dependency>
 
     <!-- Test -->
