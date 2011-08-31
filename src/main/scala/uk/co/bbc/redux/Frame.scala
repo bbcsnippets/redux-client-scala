@@ -20,11 +20,12 @@ object Frame {
     var imageReader:ImageReader      = ImageIO.getImageReadersByFormatName("JPEG").next()
     var imageStream:ImageInputStream = ImageIO.createImageInputStream(inputStream)
 
+    imageReader.setInput(imageStream)
+
     // Throw up an error if the requested second is out of range
     if (second * WIDTH > imageReader.getWidth(0)) throw new FrameNotFoundException
 
     var param:ImageReadParam         = imageReader.getDefaultReadParam()
-    imageReader.setInput(imageStream)
     param.setSourceRegion(new Rectangle(second * WIDTH, 0, WIDTH, HEIGHT))
     imageReader.read(0, param)
   }
