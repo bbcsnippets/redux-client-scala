@@ -16,7 +16,6 @@ object Frame {
   val WIDTH:Int  = 480
   val HEIGHT:Int = 270
 
-  // TODO - TEST THIS FFS!
   def fromInputStream(inputStream:InputStream, second:Int) : BufferedImage = {
     var imageReader:ImageReader      = ImageIO.getImageReadersByFormatName("JPEG").next()
     var imageStream:ImageInputStream = ImageIO.createImageInputStream(inputStream)
