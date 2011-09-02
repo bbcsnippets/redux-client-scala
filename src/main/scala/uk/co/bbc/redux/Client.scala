@@ -3,6 +3,7 @@ package uk.co.bbc.redux
 import scala.xml._
 import scala.io.Source
 import javax.imageio.ImageIO
+import java.io.InputStream
 import java.io.BufferedInputStream
 import java.awt.image.BufferedImage
 import org.apache.commons.httpclient._
@@ -63,7 +64,7 @@ class Client {
 
     // Download a file
     client.download downloadUrl, inputStream:InputStream => {
-      ... code that handles InputStream ...
+      ... code that reads and closes the InputStream ...
     }
 
     // Get an individual frame - uses a fairly efficient approach to
@@ -82,10 +83,8 @@ class Client {
     userRequest (Url.login(username, password), xml => User.createFromXMLResponse(xml) )
   }
 
-  def logout (user: User) : User = {
-    getRequestWithStringResponse(Url.logout(user.session.token), otherHttpException)
-    user.session = null
-    user
+  def logout (user: User) : Unit = {
+    getRequestWithStringResponse (Url.logout(user.session.token), otherHttpException)
   }
 
   def key (diskReference:String, session:Session) : Key = {
@@ -96,29 +95,22 @@ class Client {
     contentRequest (Url.content(diskReference, session.token), xml => Content.createFromXMLResponse(xml) )
   }
 
+  def download[T] (url: String, block: InputStream => T) : T = {
+    getRequest(url, method => block(method.getResponseBodyAsStream), status => status match {
+      case 404 => throw new DownloadNotFoundException
+      case _   => otherHttpException(status)
+    })
+  }
+
   def frame (diskReference:String, seconds:Int, key:Key) : BufferedImage = {
     val mins:Int    = seconds / 60
     val secs:Int    = seconds - mins * 60
-    getRequest(Url.frames(diskReference, mins, key), method => {
-      Frame.fromInputStream(method.getResponseBodyAsStream, secs)
-    }, status => status match {
-      case 404 => throw new ContentNotFoundException
-      case _   => otherHttpException(status)
-    })
-
+    download(Url.frames(diskReference, mins, key), stream => Frame.fromInputStream(stream, secs))
   }
 
   /****************************************
    * DOMAIN SPECIFIC GET REQUEST METHODS
    ****************************************/
-
-   private def imageRequest[T] (url:String, block: BufferedImage => T) : T = {
-     var response:BufferedImage = getRequestWithImageResponse(url, status => status match {
-       case 404 => throw new ContentNotFoundException
-       case _   => otherHttpException(status)
-     })
-     block(response)
-   }
 
    private def contentRequest[T] (url:String, block: NodeSeq => T) : T = {
      var response:NodeSeq = getRequestWithXmlResponse(url, status => status match {
@@ -142,17 +134,9 @@ class Client {
      throw new ClientHttpException(status.toString)
    }
 
-
   /****************************************
    * GENERIC GET REQUEST METHODS
    ****************************************/
-
-  private def getRequestWithImageResponse(url: String, error: Int => BufferedImage) : BufferedImage = {
-    getRequest(url, method => {
-      ImageIO.setUseCache(false)
-      ImageIO.read(new BufferedInputStream(method.getResponseBodyAsStream()))
-    }, error)
-  }
 
   private def getRequestWithXmlResponse (url:String, error: Int => NodeSeq) : NodeSeq = {
     getRequest(url, method => {

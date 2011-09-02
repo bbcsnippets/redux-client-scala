@@ -37,9 +37,7 @@ class ClientTest {
   @Test
   def testLogoutWorks() {
     client.httpClient = new HttpClientMock(200, "")
-    var _user:User = user
-    client.logout(_user)
-    assertNull(_user.session)
+    client.logout(user)
   }
 
   @Test
@@ -100,8 +98,11 @@ class ClientTest {
   @Test(expected = classOf[ContentNotFoundException])
   def contentThrowsNotFoundException                  = withStatus(404, () => { client.content("", session) })
 
-  @Test(expected = classOf[ContentNotFoundException])
-  def framesThrowsNotFoundException                  = withStatus(404, () => { client.frame("", 1, new Key("some-key")) })
+  @Test(expected = classOf[DownloadNotFoundException])
+  def framesThrowsNotFoundException                   = withStatus(404, () => { client.frame("", 1, new Key("some-key")) })
+
+  @Test(expected = classOf[DownloadNotFoundException])
+  def downloadThrowsNotFoundException                 = withStatus(404, () => { client.download("http://g.bbcredux.com/", stream => stream) })
 
   @Test(expected = classOf[SessionInvalidException])
   def keyThrowsSessionInvalidException                = withStatus(403, () => { client.key("", session) })
