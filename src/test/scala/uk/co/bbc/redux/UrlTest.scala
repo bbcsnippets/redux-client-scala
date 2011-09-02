@@ -2,6 +2,7 @@ package uk.co.bbc.redux
 
 import org.junit._
 import Assert._
+import java.text.SimpleDateFormat
 
 @Test
 class UrlTest {
@@ -44,5 +45,8 @@ class UrlTest {
 
   @Test
   def dvbsubs = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/foo-dvbsubs.xml", Url.dvbsubs("foo", key))
+
+  @Test
+  def tv      = assertEquals(Url.WWW_HOST+"/day/2011-02-01", Url.tv(new SimpleDateFormat("yyyy-MM-dd").parse("2011-02-01"), token))
 
 }

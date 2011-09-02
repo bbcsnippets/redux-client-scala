@@ -1,5 +1,8 @@
 package uk.co.bbc.redux
 
+import java.util.Date
+import java.util.Calendar
+
 object Url {
 
   val API_HOST : String = "http://api.bbcredux.com"
@@ -44,6 +47,15 @@ object Url {
 
   def dvbsubs (diskReference:String, key:Key) : String = {
     WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/"+diskReference+"-dvbsubs.xml"
+  }
+
+  def tv (date:Date, token:String) : String = {
+    val calendar:Calendar = Calendar.getInstance
+    calendar.setTime(date)
+    val year:String  = calendar.get(Calendar.YEAR).toString
+    val month:String = "%02d" format (calendar.get(Calendar.MONTH) + 1)
+    val day:String   = "%02d" format calendar.get(Calendar.DATE)
+    WWW_HOST+"/day/"+year+"-"+month+"-"+day
   }
 
 }
