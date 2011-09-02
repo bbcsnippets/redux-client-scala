@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<response>
+  <user>
+    <token>some-token</token>
+    <id>1234</id>
+    <username>testuser</username>
+    <email>test.user@example.com</email>
+    <first_name>Test</first_name>
+    <last_name>User</last_name>
+  </user>
+</response>

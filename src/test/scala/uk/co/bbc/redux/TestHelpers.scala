@@ -21,8 +21,7 @@ trait MockableHttp {
 trait TestFile {
 
   def testFile (path:String) : FileInputStream = {
-    val path = Thread.currentThread().getContextClassLoader().getResource("frame_collection.jpg").getFile
-    val file = new File(path)
+    val file = new File(Thread.currentThread().getContextClassLoader().getResource(path).getFile)
     new FileInputStream(file)
   }
 

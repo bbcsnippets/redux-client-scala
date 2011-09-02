@@ -3,21 +3,17 @@ package uk.co.bbc.redux
 import org.junit._
 import Assert._
 import java.util.Date
+import scala.xml._
 
 @Test
-class KeyTest {
+class KeyTest extends TestFile {
 
   var key:Key = new Key("some-key")
 
   @Test
   def testParsesXMLOK() {
-    val xml = <response>
-      <programme>
-        <key>some-key</key>
-      </programme>
-    </response>
-    var key:Key = Key.createFromXMLResponse(xml)
-    assertEquals(key.value, "some-key")
+    var key:Key = Key.createFromXMLResponse(XML.load(testFile("key.xml")))
+    assertEquals(key.value, "some-value")
   }
 
   @Test
