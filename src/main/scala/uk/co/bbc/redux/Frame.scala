@@ -9,8 +9,6 @@ import javax.imageio.ImageIO
 import java.awt.Rectangle
 import java.awt.image.BufferedImage
 
-class FrameNotFoundException extends Exception
-
 object Frame {
 
   val WIDTH:Int  = 480

@@ -4,8 +4,6 @@ import java.io.InputStream
 import java.io.BufferedInputStream
 import java.awt.image.BufferedImage
 
-class ClientHttpException(status:String) extends Exception(status:String) {}
-
 class Client extends Http {
 
   /** Login to redux

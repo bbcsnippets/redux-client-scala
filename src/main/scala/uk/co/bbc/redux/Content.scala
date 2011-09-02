@@ -3,8 +3,6 @@ package uk.co.bbc.redux
 import scala.xml._
 import java.util.Date
 
-class ContentNotFoundException extends Exception
-
 object Content {
   def createFromXMLResponse(xml:NodeSeq) : Content = {
     var details:NodeSeq      = xml \\ "response" \\ "programme"

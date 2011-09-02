@@ -2,13 +2,6 @@ package uk.co.bbc.redux
 
 import scala.xml._
 
-/**
- * @author ${user.name}
- */
-
-class UserException extends Exception
-class UserNotFoundException extends UserException
-class UserPasswordException extends UserException
 class User (var id:Int, var session:Session, var username:String, var firstName:String, var lastName:String, var email:String)
 
 object User {
