@@ -5,9 +5,9 @@ import java.io.ByteArrayInputStream;
 
 public class HttpClientMock extends HttpClient {
    private int expectedResponseStatus;
-   private String expectedResponseBody;
+   private ByteArrayInputStream expectedResponseBody;
 
-   public HttpClientMock (int responseStatus, String responseBody) {
+   public HttpClientMock (int responseStatus, ByteArrayInputStream responseBody) {
       this.expectedResponseStatus = responseStatus;
       this.expectedResponseBody = responseBody;
    }
@@ -15,7 +15,7 @@ public class HttpClientMock extends HttpClient {
    @Override
    public int executeMethod(HttpMethod method) {
       try {
-        ((HttpMethodBase)method).setResponseStream(new ByteArrayInputStream(expectedResponseBody.getBytes("UTF-8")));
+        ((HttpMethodBase)method).setResponseStream(expectedResponseBody);
         return expectedResponseStatus;
       } catch (Exception e) {
         throw new RuntimeException();

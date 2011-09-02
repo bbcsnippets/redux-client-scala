@@ -2,10 +2,9 @@ package uk.co.bbc.redux
 
 import org.junit._
 import Assert._
-import org.apache.commons.httpclient.HttpClientMock;
 
 @Test
-class ClientTest {
+class ClientTest extends MockableHttp {
 
   var client:Client = new Client
 
@@ -29,16 +28,13 @@ class ClientTest {
         <last_name>User</last_name>
       </user>
     </response>
-    client.httpClient = new HttpClientMock(200, xml.toString)
+    client.httpClient = mockClient(200, xml.toString)
     var user:User = client.login("i-do-exist", "good-password")
     assertEquals(user.id, 1234)
   }
 
   @Test
-  def testLogoutWorks() {
-    client.httpClient = new HttpClientMock(200, "")
-    client.logout(user)
-  }
+  def testLogoutWorks()  = withStatus(200, () => { client.logout(user) })
 
   @Test
   def testKeyWorks() {
@@ -47,7 +43,7 @@ class ClientTest {
         <key>some-value</key>
       </programme>
     </response>
-    client.httpClient = new HttpClientMock(200, xml.toString)
+    client.httpClient = mockClient(200, xml.toString)
     var key:Key = client.key("blah", session)
     assertEquals(key.value, "some-value")
   }
@@ -67,7 +63,7 @@ class ClientTest {
         <key>some-value</key>
       </programme>
     </response>
-    client.httpClient = new HttpClientMock(200, xml.toString)
+    client.httpClient = mockClient(200, xml.toString)
     var content:Content = client.content("blah", session)
     assertEquals(content.key.value, "some-value")
     assertEquals(content.title, "Top Gear")
@@ -111,7 +107,7 @@ class ClientTest {
   def contentSessionInvalidException                  = withStatus(403, () => { client.content("", session) })
 
   def withStatus(status:Int, callback: () => _) {
-    client.httpClient = new HttpClientMock(status, "")
+    client.httpClient = mockClient(status, "")
     callback()
   }
 

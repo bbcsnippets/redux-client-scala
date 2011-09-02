@@ -7,7 +7,9 @@ import java.io.FileInputStream
 import java.awt.image.BufferedImage
 
 @Test
-class FrameTest {
+class FrameTest extends TestFile {
+
+  def testImage     = testFile("frame_collection.jpg")
 
   @Test
   def widthCorrect  = assertEquals(Frame.WIDTH, 480)
@@ -17,20 +19,14 @@ class FrameTest {
 
   @Test
   def sanityCheckFromInputStream {
-    val dest:BufferedImage = Frame.fromInputStream(testImageStream, 20)
+    val dest:BufferedImage = Frame.fromInputStream(testImage, 20)
     assertEquals(480, dest.getWidth)
     assertEquals(270, dest.getHeight)
   }
 
   @Test(expected = classOf[FrameNotFoundException])
   def fromInputStreamThrows {
-    Frame.fromInputStream(testImageStream, 61)
-  }
-
-  def testImageStream = {
-    val path = Thread.currentThread().getContextClassLoader().getResource("frame_collection.jpg").getFile
-    val file = new File(path)
-    new FileInputStream(file)
+    Frame.fromInputStream(testImage, 61)
   }
 
 }
