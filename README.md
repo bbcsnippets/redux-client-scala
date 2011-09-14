@@ -52,15 +52,13 @@
     var frame:BufferedImage = client.frame("some-disk-reference", second, key)
 
     // Get schedule for tv / radio data
-    client.tv (date, user.session) channels => channels foreach {
-      case (channel, items) => {
-        items foreach => {
-          case (diskReference, content) => {
-            println(diskReference)
-            println(content.title) // content here is a lambda which makes a subsequent call to client.content
-          }
-        }
-      }
-    }
+    var schedule:Schedule   = client.tvSchedule(date, user.session)
+
+    // And iteregate the schedule
+    schedule.channels             // = List ("bbcone", "bbctwo", etc)
+    schedule.channel("bbcone")    // = List ("some-disk-reference", "another-disk-reference", etc)
+
+
+## Working with a proxy
 
 
