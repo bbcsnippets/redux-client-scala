@@ -1,10 +1,15 @@
 package uk.co.bbc.redux
 
+import java.util.Date
 import java.io.InputStream
 import java.io.BufferedInputStream
 import java.awt.image.BufferedImage
+import scala.xml._
+import scala.xml.factory.XMLLoader
 
 class Client extends Http {
+
+  var htmlParser:XMLLoader[Elem] = XML.withSAXParser(new org.ccil.cowan.tagsoup.jaxp.SAXFactoryImpl().newSAXParser())
 
   /** Login to redux
    *
@@ -92,6 +97,26 @@ class Client extends Http {
     val mins:Int    = seconds / 60
     val secs:Int    = seconds - mins * 60
     download(Url.frames(diskReference, mins, key), stream => Frame.fromInputStream(stream, secs))
+  }
+
+  /**
+   * Get an arbitary page from redux and return as NodeSeq ready for XML parsing
+   *
+   * @param url A url to download
+   * @param session A valid Session
+   * @throws SessionInvalidException  The session token is broken
+   * @throws ClientHttpException      Some over HTTP error has occured
+   */
+  def html (url:String, session:Session) : NodeSeq = {
+    val response:NodeSeq = getRequest(url, "BBC_video="+session.token, method => {
+      htmlParser.load(method.getResponseBodyAsStream())
+    }, otherHttpException)
+
+    if (response \\ "@name" exists { _.text == "dologin" }) {
+      throw new SessionInvalidException
+    }
+
+    response
   }
 
 }

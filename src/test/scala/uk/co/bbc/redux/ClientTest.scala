@@ -86,12 +86,18 @@ class ClientTest extends MockableHttp with TestFile {
   @Test(expected = classOf[SessionInvalidException])
   def contentSessionInvalidException                  = withStatus(403, () => { client.content("", session) })
 
+  @Test(expected = classOf[ClientHttpException])
+  def htmlThrowsExceptionWithBadResponse              = withStatus(404, () => { client.html("http://g.bbcredux.com", session) })
+
+  @Test(expected = classOf[SessionInvalidException])
+  def htmlThrowsSessionInvalidException               {
+    client.httpClient = mockClient(200, testFile("login.html"))
+    client.html("http://g.bbcredux.com", session)
+  }
+
   def withStatus(status:Int, callback: () => _) {
     client.httpClient = mockClient(status, "")
     callback()
   }
 
-
 }
-
-

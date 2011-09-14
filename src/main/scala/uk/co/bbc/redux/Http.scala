@@ -5,10 +5,11 @@ import scala.io.Source
 import org.apache.commons.httpclient._
 import org.apache.commons.httpclient.methods._
 import org.apache.commons.httpclient.params.HttpMethodParams
+import org.apache.commons.httpclient.cookie.CookiePolicy
 
 trait Http {
 
-  var httpClient:HttpClient = new HttpClient
+  var httpClient:HttpClient      = new HttpClient
 
   /****************************************
    * DOMAIN SPECIFIC GET REQUEST METHODS
@@ -54,7 +55,14 @@ trait Http {
   }
 
   protected def getRequest[T] (url: String, success: GetMethod => T, error: Int => T) : T = {
+    getRequest(url, "", success, error)
+  }
+
+  protected def getRequest[T] (url: String, cookie:String, success: GetMethod => T, error: Int => T) : T = {
     val method:GetMethod = new GetMethod(url)
+    method.getParams().setCookiePolicy(CookiePolicy.IGNORE_COOKIES)
+    method.setRequestHeader("Cookie", cookie)
+
     val status:Int       = httpClient.executeMethod(method)
     try {
       status match {
