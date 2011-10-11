@@ -1,3 +1,27 @@
+# redux-scala-client
+
+## Maven install
+
+Latest version number at: http://bbcsnippets.github.com/redux-client-scala/project-reports.html
+
+    <repositories>
+      <repository>
+        <id>Redux Client Repo</id>
+        <url>http://bbcsnippets.github.com/redux-client-scala/maven2</url>
+      </repository>
+    </repositories>
+
+    <dependency>
+       <groupId>uk.co.bbc</groupId>
+       <artifactId>redux-client-scala</artifactId>
+       <version>${latest}</version>
+    </dependency>
+
+## Scala Docs
+
+http://bbcsnippets.github.com/redux-client-scala/scaladocs/
+
+## Quick Start
 
     // Get an instance of the client
     var client:Client   = new Client
