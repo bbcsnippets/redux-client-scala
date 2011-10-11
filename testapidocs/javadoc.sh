@@ -1,1 +1,0 @@
-/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/bin/javadoc -J-Dhttp.proxySet=true -J-Dhttp.proxyHost=www-cache.reith.bbc.co.uk -J-Dhttp.proxyPort=80 @options @packages
