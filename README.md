@@ -29,7 +29,7 @@ TODO
 
 ### Users and sessions
 
-You need to use the client to login into Redux, this will return you a User object with an associated Session that you need to use to make further requests ...
+You need to use the client to login into Redux, this will return you a `User` object with an associated `Session` that you need to use to make further requests ...
 
     // Get an instance of the client
     val client:Client   = new Client
