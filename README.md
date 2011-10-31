@@ -165,6 +165,10 @@ The schedule list relies on screen scraping Redux, unfortunately we can't get th
 
 Please send new code in the form of a pull requests with tests. Run the current test suite with ...
 
-mvn test  # Runs junit test suite
-mvn scala:script -DscriptFile=scripts/sanity_test.scala  # Does an integration test of codebase + redux
+    mvn test  # Runs junit test suite
+    mvn scala:script -DscriptFile=scripts/sanity_test.scala  # Does an integration test of codebase + redux
 
+## Release
+
+    mvn release:prepare
+    mvn release:perform
