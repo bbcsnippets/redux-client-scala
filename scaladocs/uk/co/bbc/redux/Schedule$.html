@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>Scaladoc for uk.co.bbc.redux.Url</title>
+          <title>Scaladoc for uk.co.bbc.redux.Schedule</title>
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		      <script type="text/javascript" src="../../../../lib/jquery.js"></script>
           
@@ -17,13 +17,13 @@
 
       <div id="definition">
         <img src="../../../../lib/object_big.png" />
-        <h1>Url</h1>
+        <h1>Schedule</h1>
       </div>
 
       <h4 class="signature" id="signature">
       <span class="kind">object</span>
       <span class="symbol">
-        <span class="name">Url</span><span class="result"> extends AnyRef</span>
+        <span class="name">Schedule</span><span class="result"> extends AnyRef</span>
       </span>
       </h4>
       <div class="fullcomment" id="comment"></div>
@@ -171,22 +171,6 @@
             
           </div>
           
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#API_HOST">
-      <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol">
-        <span class="name">API_HOST</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#WWW_HOST">
-      <h4 class="signature">
-      <span class="kind">val</span>
-      <span class="symbol">
-        <span class="name">WWW_HOST</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="scala.Any#asInstanceOf">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -230,19 +214,19 @@ part of compilation it is not possible to check whether the contents of the list
             
           </div>
           
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#content">
+    </li><li visbl="pub" name="uk.co.bbc.redux.Schedule#createFromXMLResponse">
       <h4 class="signature">
       <span class="kind">def</span>
       <span class="symbol">
-        <span class="name">content</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="token">token: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">createFromXMLResponse</span><span class="params">(<span name="xml">xml: <span class="extype" name="scala.xml.NodeSeq">NodeSeq</span></span>)</span><span class="result">: <span class="extype" name="scala.collection.immutable.Seq">Seq</span>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
       </h4>
       
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#dvbsubs">
+    </li><li visbl="pub" name="uk.co.bbc.redux.Schedule#diskRefUrl">
       <h4 class="signature">
-      <span class="kind">def</span>
+      <span class="kind">val</span>
       <span class="symbol">
-        <span class="name">dvbsubs</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+        <span class="name">diskRefUrl</span><span class="result">: <span class="extype" name="scala.util.matching.Regex">Regex</span></span>
       </span>
       </h4>
       
@@ -331,22 +315,6 @@ there are no more references to the object.</p><p>The details of when and if the
             
           </div>
           
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#flv">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">flv</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#frames">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">frames</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="minute">minute: <span class="extype" name="scala.Int">Int</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="scala.AnyRef#getClass">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -368,22 +336,6 @@ there are no more references to the object.</p><p>The details of when and if the
             
           </div>
           
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#h264Hi">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">h264Hi</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#h264Lo">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">h264Lo</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="scala.AnyRef#hashCode">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -430,62 +382,6 @@ possible to check whether the contents of the list are of the requested typed.
             
           </div>
           
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#key">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">key</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="token">token: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#login">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">login</span><span class="params">(<span name="username">username: <span class="extype" name="java.lang.String">String</span></span>, <span name="password">password: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#logout">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">logout</span><span class="params">(<span name="token">token: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#montage">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">montage</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#mp3">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">mp3</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#mpeg2">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">mpeg2</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#mpeg4">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">mpeg4</span><span class="params">(<span name="diskReference">diskReference: <span class="extype" name="java.lang.String">String</span></span>, <span name="key">key: <a href="Key.html" class="extype" name="uk.co.bbc.redux.Key">Key</a></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="scala.AnyRef#ne">
       <h4 class="signature">
       <span class="kind">def</span>
@@ -581,14 +477,6 @@ possible to check whether the contents of the list are of the requested typed.
             
           </div>
           
-    </li><li visbl="pub" name="uk.co.bbc.redux.Url#tv">
-      <h4 class="signature">
-      <span class="kind">def</span>
-      <span class="symbol">
-        <span class="name">tv</span><span class="params">(<span name="date">date: <span class="extype" name="java.util.Date">Date</span></span>)</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
-      </span>
-      </h4>
-      
     </li><li visbl="pub" name="scala.AnyRef#wait">
       <h4 class="signature">
       <span class="kind">def</span>
