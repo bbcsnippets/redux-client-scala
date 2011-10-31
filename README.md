@@ -100,7 +100,7 @@ You can download files from redux, available urls are mpeg2, mpeg4, mp3, flv, h2
 
     val key       = client.key("5286433008768041518", user.session)
     val url       = Url.flv("5286433008768041518", key)
-    client.download url, inputStream:InputStream => {
+    client.download url, inputStream => {
       ... code that reads and closes the InputStream ...
     }
 
@@ -142,7 +142,9 @@ Docs are available at http://bbcsnippets.github.com/redux-client-scala/scaladocs
 
 ### Using a proxy server
 
-TODO
+The Client uses the Apache commons HTTP Client 3.x, you can access the underlying httpClient instance to set proxies or connection managers, etc.
+
+      client.httpClient.getHostConfiguration().setProxy("www-cache.reith.bbc.co.uk", 80);
 
 ### Password is sent to Redux unencrypted
 
