@@ -56,6 +56,6 @@ class UrlTest {
   def h264_lo = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/foo-lo.mp4", Url.h264Lo("foo", key))
 
   @Test
-  def tv      = assertEquals(Url.WWW_HOST+"/day/2011-02-01", Url.tv(new SimpleDateFormat("yyyy-MM-dd").parse("2011-02-01"), token))
+  def tv      = assertEquals(Url.WWW_HOST+"/day/2011-02-01", Url.tv(new SimpleDateFormat("yyyy-MM-dd").parse("2011-02-01")))
 
 }

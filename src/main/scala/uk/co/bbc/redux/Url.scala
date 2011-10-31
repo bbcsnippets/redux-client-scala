@@ -61,7 +61,7 @@ object Url {
     WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/"+diskReference+"-lo.mp4"
   }
 
-  def tv (date:Date, token:String) : String = {
+  def tv (date:Date) : String = {
     val calendar:Calendar = Calendar.getInstance
     calendar.setTime(date)
     val year:String  = calendar.get(Calendar.YEAR).toString

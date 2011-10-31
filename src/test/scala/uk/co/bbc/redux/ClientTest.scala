@@ -2,6 +2,7 @@ package uk.co.bbc.redux
 
 import org.junit._
 import Assert._
+import java.text.SimpleDateFormat
 
 @Test
 class ClientTest extends MockableHttp with TestFile {
@@ -93,6 +94,13 @@ class ClientTest extends MockableHttp with TestFile {
   def htmlThrowsSessionInvalidException               {
     client.httpClient = mockClient(200, testFile("login.html"))
     client.html("http://g.bbcredux.com", session)
+  }
+
+  @Test
+  def scheduleWorks {
+    client.httpClient = mockClient(200, testFile("tv_schedule.html"))
+    val resp = client.tvSchedule(new SimpleDateFormat("yyyy-MM-dd").parse("2011-02-01"), session)
+    assertEquals(resp.length, 201)
   }
 
   def withStatus(status:Int, callback: () => _) {

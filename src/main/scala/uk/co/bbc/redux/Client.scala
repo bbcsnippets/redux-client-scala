@@ -100,6 +100,19 @@ class Client extends Http {
   }
 
   /**
+   * Retreive a list of disk references for a date (i.e. a "schedule")
+   *
+   * @param date A Java date object
+   * @param session A valid Session
+   * @throws SessionInvalidException  The session token is broken
+   * @throws ClientHttpException      Some over HTTP error has occured
+   */
+  def tvSchedule (date:Date, session:Session) : Seq[String] = {
+    val xml = html(Url.tv(date), session)
+    Schedule.createFromXMLResponse(xml)
+  }
+
+  /**
    * Get an arbitary page from redux and return as NodeSeq ready for XML parsing
    *
    * @param url A url to download
