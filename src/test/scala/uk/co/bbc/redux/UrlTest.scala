@@ -41,10 +41,19 @@ class UrlTest {
   def mpeg4   = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/2m-mp4/foo_mpeg4.ts", Url.mpeg4("foo", key))
 
   @Test
-  def mp3     = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/2m-mp4/foo.mp3", Url.mp3("foo", key))
+  def mp3     = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/radio-mp3/foo.mp3", Url.mp3("foo", key))
 
   @Test
   def dvbsubs = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/foo-dvbsubs.xml", Url.dvbsubs("foo", key))
+
+  @Test
+  def flv     = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/flash.flv", Url.flv("foo", key))
+
+  @Test
+  def h264_hi = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/foo-hi.mp4", Url.h264Hi("foo", key))
+
+  @Test
+  def h264_lo = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/foo-lo.mp4", Url.h264Lo("foo", key))
 
   @Test
   def tv      = assertEquals(Url.WWW_HOST+"/day/2011-02-01", Url.tv(new SimpleDateFormat("yyyy-MM-dd").parse("2011-02-01"), token))

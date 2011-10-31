@@ -42,11 +42,23 @@ object Url {
   }
 
   def mp3 (diskReference:String, key:Key) : String = {
-    WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/2m-mp4/"+diskReference+".mp3"
+    WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/radio-mp3/"+diskReference+".mp3"
   }
 
   def dvbsubs (diskReference:String, key:Key) : String = {
     WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/"+diskReference+"-dvbsubs.xml"
+  }
+
+  def flv (diskReference:String, key:Key) : String = {
+    WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/flash.flv"
+  }
+
+  def h264Hi (diskReference:String, key:Key) : String = {
+    WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/"+diskReference+"-hi.mp4"
+  }
+
+  def h264Lo (diskReference:String, key:Key) : String = {
+    WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/"+diskReference+"-lo.mp4"
   }
 
   def tv (date:Date, token:String) : String = {
