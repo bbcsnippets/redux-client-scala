@@ -23,7 +23,8 @@ Latest version number at: http://bbcsnippets.github.com/redux-client-scala/proje
 
 ### SBT
 
-TODO
+    resolvers += "BBC Snippets Releases" at "http://bbcsnippets.github.com/redux-client-scala/maven2"
+    libraryDependencies += "uk.co.bbc" % "redux-client-scala" % {VERSION}
 
 ## Usage
 
