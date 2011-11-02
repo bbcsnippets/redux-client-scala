@@ -134,6 +134,9 @@ May throw any one of the following errors ...
     // crop a single frame from a jpeg strip of 60
     var frame:BufferedImage = client.frame("some-disk-reference", second, key)
 
+    // Get a montage of frames (1 farme per 20 secs)
+    var montage:BufferedImage = client.montage("some-disk-reference", key)
+
 
 ### Scala Docs
 

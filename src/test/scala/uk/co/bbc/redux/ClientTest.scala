@@ -51,6 +51,13 @@ class ClientTest extends MockableHttp with TestFile {
     assertTrue(frame.getWidth == 480)
   }
 
+  @Test
+  def testMontageWorks() {
+    client.httpClient = mockClient(200, testFile("frame_collection.jpg"))
+    var montage = client.montage("blah", new Key("some-key"))
+    assertTrue(montage.getWidth == 28800)
+  }
+
   @Test(expected = classOf[UserNotFoundException])
   def loginThrowsUserErrorWithInvalidUserNameResponse = withStatus(404, () => { client.login("i-dont-exist", "good-password") })
 
@@ -77,6 +84,9 @@ class ClientTest extends MockableHttp with TestFile {
 
   @Test(expected = classOf[DownloadNotFoundException])
   def framesThrowsNotFoundException                   = withStatus(404, () => { client.frame("", 1, new Key("some-key")) })
+
+  @Test(expected = classOf[DownloadNotFoundException])
+  def montageThrowsNotFoundException                   = withStatus(404, () => { client.montage("", new Key("some-key")) })
 
   @Test(expected = classOf[DownloadNotFoundException])
   def downloadThrowsNotFoundException                 = withStatus(404, () => { client.download("http://g.bbcredux.com/", stream => stream) })

@@ -4,6 +4,7 @@ import java.util.Date
 import java.io.InputStream
 import java.io.BufferedInputStream
 import java.awt.image.BufferedImage
+import javax.imageio.ImageIO
 import scala.xml._
 import scala.xml.factory.XMLLoader
 
@@ -78,6 +79,18 @@ class Client extends Http {
       case 404 => throw new DownloadNotFoundException
       case _   => otherHttpException(status)
     })
+  }
+
+  /**
+   * Retreive a montage of frames from a programme (frequency 1 frame every 20 secs)
+   *
+   * @param diskReference An identifier for the content
+   * @param key A key for the content
+   * @throws DownloadNotFoundException The requested file cannot be found
+   * @throws ClientHttpException      Some over HTTP error has occured
+   */
+  def montage (diskReference:String, key:Key) : BufferedImage = {
+    download(Url.montage(diskReference, key), stream => ImageIO.read(stream))
   }
 
   /**
