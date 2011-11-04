@@ -60,3 +60,5 @@ println(schedule.head)
 // When your finished logout or redux might flag your account as compromised!
 client.logout(user)
 
+client.httpClient.getHttpConnectionManager().asInstanceOf[org.apache.commons.httpclient.SimpleHttpConnectionManager
+].shutdown()

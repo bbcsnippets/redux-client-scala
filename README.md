@@ -137,6 +137,11 @@ May throw any one of the following errors ...
     // Get a montage of frames (1 farme per 20 secs)
     var montage:BufferedImage = client.montage("some-disk-reference", key)
 
+### Shutdown
+
+When instance is no longer needed, shut down connection manager to ensure immediate deallocation of all system resources
+
+    client.httpClient.getHttpConnectionManager().shutdown()
 
 ### Scala Docs
 
