@@ -20,8 +20,8 @@
 
   <licenses>
     <license>
-      <name>MIT</name>
-      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <name>Apache</name>
+      <url>http://www.apache.org/licenses/</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -35,13 +35,13 @@
 
   <scm>
     <connection>
-      scm:git:git@github.com:bbcsnippets/redux-client-scala.git
+      scm:git:git@github.com:bbcrd/redux-client-scala.git
     </connection>
     <developerConnection>
-      scm:git:git@github.com:bbcsnippets/redux-client-scala.git
+      scm:git:git@github.com:bbcrd/redux-client-scala.git
     </developerConnection>
     <url>
-      http://github.com/bbcsnippets/redux-client-scala
+      http://github.com/bbcrd/redux-client-scala
     </url>
   </scm>
 
