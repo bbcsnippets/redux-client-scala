@@ -171,6 +171,7 @@
           <!--
           <localCheckout>true</localCheckout>
           -->
+          <pushChanges>false</pushChanges>
         </configuration>
       </plugin>
 
