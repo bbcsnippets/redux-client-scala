@@ -28,6 +28,7 @@
   </licenses>
 
   <properties>
+    <github.global.server>github</github.global.server>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <encoding>UTF-8</encoding>
@@ -49,13 +50,13 @@
 
   <scm>
     <connection>
-      scm:git:git@github.com:bbcrd/redux-client-scala.git
+      scm:git:git@github.com:bbcsnippets/redux-client-scala.git
     </connection>
     <developerConnection>
-      scm:git:git@github.com:bbcrd/redux-client-scala.git
+      scm:git:git@github.com:bbcsnippets/redux-client-scala.git
     </developerConnection>
     <url>
-      http://github.com/bbcrd/redux-client-scala
+      http://github.com/bbcsnippets/redux-client-scala
     </url>
   </scm>
 
