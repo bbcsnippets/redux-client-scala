@@ -185,5 +185,18 @@ Please send new code in the form of a pull requests with tests. Run the current 
 
 ## Release
 
+Add this config to your `~/.m2/settings.xml`:
+
+    <servers>
+      <server>
+        <id>github</id>
+        <username>YOUR-USERNAME</username>
+        <password>YOUR-PASSWORD</password>
+        <token>YOUR-OAUTH2-TOKEN</token>
+      </server>
+    </servers>
+
+ Now run the release tasks:
+
     mvn release:prepare
     mvn release:perform
