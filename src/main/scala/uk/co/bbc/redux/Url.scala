@@ -24,6 +24,10 @@ object Url {
     API_HOST+"/content/"+diskReference+"/data?token="+token
   }
 
+  def image (diskReference:String) : String = {
+    WWW_HOST+"/programme/"+diskReference+"/download/image-640.jpg"
+  }
+
   def frames (diskReference:String, minute:Int, key:Key) : String = {
     val timecode:String = "%05d" format (minute * 60)
     WWW_HOST+"/programme/"+diskReference+"/download/"+key.value+"/frame-270-"+timecode+"-60.jpg"

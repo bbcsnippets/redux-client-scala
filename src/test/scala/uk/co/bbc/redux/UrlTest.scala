@@ -29,6 +29,9 @@ class UrlTest {
   def content = assertEquals(Url.API_HOST+"/content/foo/data?token="+token, Url.content("foo", token))
 
   @Test
+  def image   = assertEquals(Url.WWW_HOST+"/programme/foo/download/image-640.jpg", Url.image("foo"))
+
+  @Test
   def frames  = assertEquals(Url.WWW_HOST+"/programme/foo/download/"+key.value+"/frame-270-00120-60.jpg", Url.frames("foo", 2, key))
 
   @Test
