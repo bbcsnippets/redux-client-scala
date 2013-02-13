@@ -82,6 +82,22 @@ class Client extends Http {
   }
 
   /**
+   * Retreive an image representing a redux programme, this will be a jpeg for most
+   * TV and probably cause an error for radio content.
+   *
+   * The image is a frame of footage from the first 5 minutes of content, it's 640x360
+   *
+   * Note, you don't require a key for this call
+   *
+   * @param diskReference An identifier for the content
+   * @throws DownloadNotFoundException The requested file cannot be found
+   * @throws ClientHttpException      Some over HTTP error has occured
+   */
+  def image (diskReference:String) : BufferedImage = {
+    download(Url.image(diskReference), stream => ImageIO.read(stream))
+  }
+
+  /**
    * Retreive a montage of frames from a programme (frequency 1 frame every 20 secs)
    *
    * @param diskReference An identifier for the content
@@ -110,6 +126,19 @@ class Client extends Http {
     val mins:Int    = seconds / 60
     val secs:Int    = seconds - mins * 60
     download(Url.frames(diskReference, mins, key), stream => Frame.fromInputStream(stream, secs))
+  }
+
+  /**
+   * Retreive a strip of 60 frames from a programme (frequency of 1 frame every second)
+   *
+   * @param diskReference An identifier for the content
+   * @param minute The minute of footage that the strip of frames represents
+   * @param key A key for the content
+   * @throws DownloadNotFoundException The requested file cannot be found
+   * @throws ClientHttpException      Some over HTTP error has occured
+   */
+  def frames (diskReference:String, minute:Int, key:Key) : BufferedImage = {
+    download(Url.frames(diskReference, minute, key), stream => ImageIO.read(stream))
   }
 
   /**

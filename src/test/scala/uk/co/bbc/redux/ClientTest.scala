@@ -40,22 +40,40 @@ class ClientTest extends MockableHttp with TestFile {
 
   @Test
   def testDownloadWorks() {
-    client.httpClient = mockClient(200, testFile("frame_collection.jpg"))
+    client.httpClient = mockClient(200, testFile("frames.jpg"))
     client.download("http://blah/file", stream => {})
   }
 
   @Test
+  def testImageWorks() {
+    client.httpClient = mockClient(200, testFile("image.jpg"))
+    var frame = client.image("blah")
+    assertTrue(frame.getWidth == 640)
+    assertTrue(frame.getHeight == 360)
+  }
+
+  @Test
   def testFrameWorks() {
-    client.httpClient = mockClient(200, testFile("frame_collection.jpg"))
-    var frame = client.frame("blah", 1, new Key("som-key"))
+    client.httpClient = mockClient(200, testFile("frames.jpg"))
+    var frame = client.frame("blah", 1, new Key("some-key"))
     assertTrue(frame.getWidth == 480)
+    assertTrue(frame.getHeight == 270)
+  }
+
+  @Test
+  def testFramesWorks() {
+    client.httpClient = mockClient(200, testFile("frames.jpg"))
+    var frame = client.frames("blah", 1, new Key("some-key"))
+    assertTrue(frame.getWidth == 28800)
+    assertTrue(frame.getHeight == 270)
   }
 
   @Test
   def testMontageWorks() {
-    client.httpClient = mockClient(200, testFile("frame_collection.jpg"))
+    client.httpClient = mockClient(200, testFile("montage.jpg"))
     var montage = client.montage("blah", new Key("some-key"))
-    assertTrue(montage.getWidth == 28800)
+    assertTrue(montage.getWidth == 8000)
+    assertTrue(montage.getHeight == 3240)
   }
 
   @Test(expected = classOf[UserNotFoundException])

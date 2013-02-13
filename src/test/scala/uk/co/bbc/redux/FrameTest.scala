@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage
 @Test
 class FrameTest extends TestFile {
 
-  def testImage     = testFile("frame_collection.jpg")
+  def testImage     = testFile("frames.jpg")
 
   @Test
   def widthCorrect  = assertEquals(Frame.WIDTH, 480)
