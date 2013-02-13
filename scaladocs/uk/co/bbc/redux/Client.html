@@ -263,6 +263,21 @@ HTTP response body as an InputStream which can be read however you like.</p><p>T
 strip of 60. It is returned as a BufferedImage.
 </p></div><dl class="paramcmts block"><dt class="param">diskReference</dt><dd class="cmt"><p>An identifier for the content</p></dd><dt class="param">seconds</dt><dd class="cmt"><p>Number of seconds into the content to get frame for</p></dd><dt class="param">key</dt><dd class="cmt"><p>A key for the content</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">DownloadNotFoundException<p>The requested file cannot be found</p></span><span class="cmt">FrameNotFoundException<p>Cannot find requested frame (i.e. you asked for something out of duration)</p></span><span class="cmt">ClientHttpException<p>Some over HTTP error has occured
 </p></span></dd></dl></div>
+    </li><li visbl="pub" name="uk.co.bbc.redux.Client#frames" data-isabs="false">
+      <a id="frames(String,Int,Key):BufferedImage"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">frames</span><span class="params">(<span name="diskReference">diskReference: String</span>, <span name="minute">minute: <span name="scala.Int" class="extype">Int</span></span>, <span name="key">key: <a name="uk.co.bbc.redux.Key" class="extype" href="Key.html">Key</a></span>)</span><span class="result">: <span name="java.awt.image.BufferedImage" class="extype">BufferedImage</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Retreive a strip of 60 frames from a programme (frequency of 1 frame every second)
+</p><div class="fullcomment"><div class="comment cmt"><p>Retreive a strip of 60 frames from a programme (frequency of 1 frame every second)
+</p></div><dl class="paramcmts block"><dt class="param">diskReference</dt><dd class="cmt"><p>An identifier for the content</p></dd><dt class="param">minute</dt><dd class="cmt"><p>The minute of footage that the strip of frames represents</p></dd><dt class="param">key</dt><dd class="cmt"><p>A key for the content</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">DownloadNotFoundException<p>The requested file cannot be found</p></span><span class="cmt">ClientHttpException<p>Some over HTTP error has occured
+</p></span></dd></dl></div>
     </li><li visbl="pub" name="scala.AnyRef#getClass" data-isabs="false">
       <a id="getClass():java.lang.Class[_]"></a>
       <h4 class="signature">
@@ -378,6 +393,22 @@ GENERIC GET REQUEST METHODS
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a name="uk.co.bbc.redux.Http" class="extype" href="Http.html">Http</a></dd></dl></div>
+    </li><li visbl="pub" name="uk.co.bbc.redux.Client#image" data-isabs="false">
+      <a id="image(String):BufferedImage"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">image</span><span class="params">(<span name="diskReference">diskReference: String</span>)</span><span class="result">: <span name="java.awt.image.BufferedImage" class="extype">BufferedImage</span></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Retreive an image representing a redux programme, this will be a jpeg for most
+TV and probably cause an error for radio content.</p><div class="fullcomment"><div class="comment cmt"><p>Retreive an image representing a redux programme, this will be a jpeg for most
+TV and probably cause an error for radio content.</p><p>The image is a frame of footage from the first 5 minutes of content, it's 640x360</p><p>Note, you don't require a key for this call
+</p></div><dl class="paramcmts block"><dt class="param">diskReference</dt><dd class="cmt"><p>An identifier for the content</p></dd></dl><dl class="attributes block"> <dt>Exceptions thrown</dt><dd><span class="cmt">DownloadNotFoundException<p>The requested file cannot be found</p></span><span class="cmt">ClientHttpException<p>Some over HTTP error has occured
+</p></span></dd></dl></div>
     </li><li visbl="pub" name="scala.Any#isInstanceOf" data-isabs="false">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <h4 class="signature">
