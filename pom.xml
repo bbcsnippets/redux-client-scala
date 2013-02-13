@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>uk.co.bbc</groupId>
   <artifactId>redux-client-scala</artifactId>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.3</version>
   <name>${project.artifactId}</name>
   <description>A scala client for BBC Redux</description>
   <inceptionYear>2011</inceptionYear>
@@ -58,7 +58,7 @@
     <url>
       http://github.com/bbcsnippets/redux-client-scala
     </url>
-    <tag>HEAD</tag>
+    <tag>redux-client-scala-0.3</tag>
   </scm>
 
   <repositories>
